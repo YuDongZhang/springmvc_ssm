@@ -26,7 +26,7 @@ public class TestMyBatis {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
         // 创建SqlSession对象
         SqlSession session = factory.openSession();
-        // 获取到代理对象
+        // 获取到代理对象(因为dao是个接口,思路中就是把代理对象存到容器中,在service中就可以调用)
         AccountDao dao = session.getMapper(AccountDao.class);
         // 查询所有数据
         List<Account> list = dao.findAll();

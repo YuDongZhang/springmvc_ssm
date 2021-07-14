@@ -20,4 +20,23 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
                                 expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
+    <!--1. 目的：把SqlMapConfig.xml配置文件中的内容配置到applicationContext.xml配置文件中    -->
+    <!-- 配置C3P0的连接池对象 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql:///ssm"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <!-- 配置SqlSession的工厂 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 配置扫描dao的包 -->
+    <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.itcast.dao"/>
+    </bean>
+
 </beans>
